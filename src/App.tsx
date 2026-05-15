@@ -1,10 +1,5 @@
-import { useEffect, useState, type JSX } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 import Text from './Text'
-import Flower from './Flower'
 import FlowerField from './FlowerField'
 
 function App() {
