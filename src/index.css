@@ -1,0 +1,523 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+
+  --color-scheme-1-dark: paleVioletRed;
+  --color-scheme-1-light: lightPink;
+  --color-scheme-2-dark: darkOliveGreen;
+  --color-scheme-2-light: darkSeaGreen;
+  --color-scheme-3-dark: sandyBrown;
+  --color-scheme-3-light: peachPuff;
+  --color-scheme-4-dark: steelBlue;
+  --color-scheme-4-light: lightBlue;
+  --color-scheme-5-dark: mediumPurple;
+  --color-scheme-5-light: lavender;
+  --color-scheme-6-dark: darkRed;
+  --color-scheme-6-light: lightCoral;
+
+  --dark: #222;
+  --light: #f9f9f9;
+
+  --letter-vw: 90vw;
+}
+
+
+@keyframes blossom {
+  0%{
+      transform: translateX(-50%) translateY(50%);
+    
+  }
+
+  50%{
+     transform: translateX(-100%) translateY(100%);
+    
+  }
+
+  100%{
+      transform: translateX(-50%) translateY(-50%);
+    
+  }
+}
+
+@keyframes flyAway {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+    z-index: 3;
+  }
+  20% {
+    opacity: 1;
+    transform: translate(calc(-50% + 20px), calc(-50% - 30px)) scale(0.8) rotate(45deg);
+    z-index: 3;
+  }
+  80% {
+    opacity: 0.8;
+    transform: translate(calc(-50% + 150px), calc(-50% - 200px)) scale(1.2) rotate(180deg);
+    z-index: 3;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 300px), calc(-50% - 400px)) scale(0.5) rotate(360deg);
+    z-index: 3;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #F5D6DC;
+}
+
+.letter-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--letter-vw);
+  height: 450px;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.animated-mail {
+  position: absolute;
+  height: 337.5px;
+  width: 100%;
+  -webkit-transition: .4s;
+  -moz-transition: .4s;
+  transition: .4s;
+}
+
+.animated-mail .body {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 225px var(--letter-vw);
+  border-color: transparent transparent #e95f55 transparent;
+  z-index: 2;
+}
+
+.animated-mail .top-fold {
+  position: absolute;
+  top: 112.5px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 114px calc(var(--letter-vw) / 2) 0 calc(var(--letter-vw) / 2);
+  -webkit-transform-origin: 50% 0%;
+  -moz-transform-origin: 50% 0%;
+  transform-origin: 50% 0%;
+  -webkit-transition: transform .4s .4s, z-index .2s .4s;
+  -moz-transition: transform .4s .4s, z-index .2s .4s;
+  transition: transform .4s .4s, z-index .2s .4s;
+  border-color: #cf4a43 transparent transparent transparent;
+  z-index: 2;
+}
+
+.animated-mail .back-fold {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 225px;
+  background: #cf4a43;
+  z-index: 0;
+}
+
+.animated-mail .left-fold {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 112.5px 0 112.5px calc(var(--letter-vw) / 2);
+  border-color: transparent transparent transparent #e15349;
+  z-index: 2;
+}
+
+.animated-mail .letter {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0px;
+  position: absolute;
+  width: 80%;
+  height: 135px;
+  background: white;
+  z-index: 1;
+  overflow: hidden;
+  -webkit-transition: .4s .2s;
+  -moz-transition: .4s .2s;
+  transition: .4s .2s;
+}
+
+.animated-mail .letter .letter-border {
+  height: 22.5px;
+  width: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    #cb5a5e,
+    #cb5a5e 18px,
+    transparent 18px,
+    transparent 40.5px
+  );
+}
+
+.animated-mail .letter .letter-title {
+  margin-top: 22.5px;
+  margin-left: 11.25px;
+  height: 22.5px;
+  width: 40%;
+  background: #cb5a5e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
+}
+
+.animated-mail .letter .letter-context {
+  margin-top: 22.5px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 22.5px;
+  width: 90%;
+  background: #cb5a5e;
+  color: white;
+  padding: 2px 0;
+}
+
+.animated-mail .letter .letter-stamp {
+  margin-top: 267.5px;
+  margin-left: 270px;
+  border-radius: 100%;
+  height: 67.5px;
+  width: 67.5px;
+  background: #cb5a5e;
+  opacity: 0.3;
+}
+
+.shadow {
+  position: absolute;
+  top: 450px;
+  left: 50%;
+  width: 900px;
+  height: 67.5px;
+  transition: .4s;
+  transform: translateX(-50%);
+  -webkit-transition: .4s;
+  -webkit-transform: translateX(-50%);
+  -moz-transition: .4s;
+  -moz-transform: translateX(-50%);
+  border-radius: 100%;
+  background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.0), rgba(0,0,0,0.0));
+}
+
+.letter-image:hover .animated-mail {
+  transform: translateY(150px);
+  -webkit-transform: translateY(150px);
+  -moz-transform: translateY(150px);
+}
+
+.letter-image:hover .animated-mail .top-fold {
+  transition: transform .4s, z-index .2s;
+  transform: rotateX(180deg);
+  -webkit-transition: transform .4s, z-index .2s;
+  -webkit-transform: rotateX(180deg);
+  -moz-transition: transform .4s, z-index .2s;
+  -moz-transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.letter-image:hover .animated-mail .letter {
+  height: 60vh;
+  overflow-y: auto;
+  transform: translateY(-10vh) translateX(-50%);
+  
+}
+
+.letter-image:hover .shadow {
+  width: 562.5px;
+}
+
+
+
+
+
+
+
+
+.flower {
+  width: 200px; /* adjust to control the size */
+  height: 200px;
+  background: var(--color-scheme-1-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  --g:/37.02% 37.02% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
+  mask: 99.964% 51.885% var(--g),63.648% 98.101% var(--g),8.47% 77.844% var(--g),10.686% 19.107% var(--g),67.232% 3.063% var(--g),radial-gradient(100% 100%,#000 25.476%,#0000 calc(25.476% + 1px));
+
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+
+  animation: flyAway 2s;
+opacity: 0;
+z-index: -3;
+}
+
+.flower-inner {
+  width: 80px; /* adjust to control the size */
+  height: 80px;
+  background: var(--color-scheme-1-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  --g:/37.02% 37.02% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
+  mask: 100% 50% var(--g),65.451% 97.553% var(--g),9.549% 79.389% var(--g),9.549% 20.611% var(--g),65.451% 2.447% var(--g),radial-gradient(100% 100%,#000 25.476%,#0000 calc(25.476% + 1px));
+}
+
+.flower-inner::after{
+  content: '';
+  width: 10px;
+  height: 10px;
+  display: block;
+  border-radius: 45px;
+  background: var(--dark);
+}
+
+.flower-variant-2 {
+  --g:/37.02% 37.02% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
+  mask: 80% 50% var(--g), 70% 95% var(--g), 20% 85% var(--g), 15% 30% var(--g), 75% 10% var(--g), radial-gradient(100% 100%,#000 25%,#0000 calc(25% + 1px));
+  transform: scale(0.9);
+}
+
+/* wariant 3 – bardziej "gwiazdkowaty" */
+.flower-variant-3 {
+  --g:/30% 30% radial-gradient(#000 calc(68% - 1px),#0000 68%) no-repeat;
+  mask: 95% 45% var(--g), 60% 98% var(--g), 12% 72% var(--g), 8% 22% var(--g), 72% 5% var(--g), radial-gradient(100% 100%,#000 28%,#0000 calc(28% + 1px));
+  transform: scale(1.05);
+}
+
+
+
+
+
+.card {
+            max-width: 760px;
+            width: 100%;
+            background: #fffef7;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255,245,235,0.4) 2%, transparent 2.5%);
+            background-size: 28px 28px;
+            border-radius: 48px 32px 56px 32px;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.01);
+        }
+
+        /* Nagłówek z serduszkiem i tytułem */
+        .hero {
+            background: #b22234;
+            background: linear-gradient(115deg, #c0392b, #e67e22, #e74c3c);
+            padding: 2rem 1.5rem 1.8rem;
+            text-align: center;
+            color: white;
+            border-bottom: 6px solid #ffd966;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            word-break: keep-all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .hero h1 span {
+            background: rgba(255,255,220,0.25);
+            padding: 0.2rem 0.9rem;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+        }
+
+        .heart-deco {
+            font-size: 2.4rem;
+            filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.2));
+            margin-bottom: 0.25rem;
+        }
+
+        /* treść życzeń */
+        .message-body {
+            padding: 2rem 2rem 1.8rem;
+            font-size: 1.08rem;
+            line-height: 1.65;
+            color: #2c1e1a;
+            background: #fffaf5;
+        }
+
+        .message-body p {
+            margin-bottom: 1.3rem;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .signature-block {
+            margin-top: 2rem;
+            padding-top: 0.8rem;
+            border-top: 2px dashed #f0bc9c;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            background: #fff0e6;
+            padding: 0.5rem 1.3rem;
+            border-radius: 60px 20px 60px 20px;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #b13b2d;
+        }
+
+        /* postscriptum */
+        .ps {
+            margin-top: 1.8rem;
+            background: #fff0e4;
+            padding: 1.1rem 1.5rem;
+            border-radius: 32px 16px 32px 16px;
+            font-size: 0.97rem;
+            font-weight: 500;
+            color: #aa4a2c;
+        }
+
+        .ps p {
+            margin-bottom: 0.5rem;
+        }
+
+        .ps p:last-child {
+            margin-bottom: 0;
+        }
+
+        .ps-extra {
+            margin-top: 0.6rem;
+            font-style: normal;
+            font-weight: 500;
+            border-left: 4px solid #e67e22;
+            padding-left: 1rem;
+        }
+
+        .bold-heart {
+            font-weight: 700;
+            color: #c0392b;
+        }
+
+        .footer-love {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-top: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* małe akcenty */
+        .highlight {
+            background: linear-gradient(120deg, #ffe6d5 0%, #ffe6d5 40%, transparent 60%);
+            padding: 0 0.2rem;
+            font-weight: 500;
+        }
+
+        .italic-quote {
+            font-style: italic;
+            font-weight: 500;
+            color: #bc5a2c;
+        }
+
+        @media (max-width: 550px) {
+            .message-body {
+                padding: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            .message-body {
+                font-size: 1rem;
+            }
+            :root{
+              font-size: xx-small;
+            }
+        }
+/* 
+.flower{
+  opacity: 0;
+} */
